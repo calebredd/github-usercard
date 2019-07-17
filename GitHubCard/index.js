@@ -2,6 +2,12 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+var use={};
+axios.get("https://api.github.com/users/calebredd").then(e => {
+  use = e.data;
+  console.log(e.data);
+  console.log(use);
+});
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -25,6 +31,47 @@
 */
 
 const followersArray = [];
+
+cardCreator = user => {
+  var card = document.createElement("div");
+  card.classList.add("card");
+  var img = document.createElement("img");
+  //img.src="url-goes-here.png"
+  card.appendChild(img);
+  var cardInfo = document.createElement("div");
+  cardInfo.classList.add("card-info");
+  card.appendChild(cardInfo);
+  var name = document.createElement("h3");
+  //add name.textContent=user's name
+  name.classList.add("name");
+  cardInfo.appendChild(name);
+  var username = document.createElement("p");
+  username.classList.add("username");
+  //add username.textContent=username;
+  cardInfo.appendChild(username);
+  var location = document.createElement("p");
+  cardInfo.appendChild(location);
+  //add location.textContent="Location: "+{users location}
+  var profile = document.createElement("p");
+  var userPageLink = document.createElement("a");
+  //add profile.textContent="Profile: "+anchor
+  profile.appendChild(userPageLink);
+
+  //add userPageLink.href="github url"
+  //add userPageLink.textContent="github url"
+  var followers = document.createElement("p");
+  var following = document.createElement("p");
+  var bio = document.createElement("p");
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(followers);
+  //add followers.textContent="Followers: "+followers count
+  cardInfo.appendChild(following);
+  //add following.textContent="Following: "+following count
+  cardInfo.appendChild(bio);
+  //add bio.textContent=user's bio
+};
+
+cardCreator(use);
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
