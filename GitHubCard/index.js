@@ -2,6 +2,10 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+var heart=document.querySelector(".header").querySelector("p");
+heart.addEventListener("click",function(){
+  return document.location.reload();
+});
 let handle=prompt("What is your github handle?");
 if(handle==""){
   handle="calebredd";
