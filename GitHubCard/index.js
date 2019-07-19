@@ -2,13 +2,13 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-var heart=document.querySelector(".header").querySelector("p");
-heart.addEventListener("click",function(){
+var heart = document.querySelector(".header").querySelector("p");
+heart.addEventListener("click", function() {
   return document.location.reload();
 });
-let handle=prompt("What is your github handle?");
-if(handle==""){
-  handle="calebredd";
+let handle = prompt("What is your github handle?");
+if (handle == "") {
+  handle = "calebredd";
 }
 // console.log(handle);
 axios
@@ -41,10 +41,12 @@ axios
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
+
 axios
-  .get(`https://api.github.com/users/${handle}/following`)
+  .get(`https://api.github.com/users/${handle}/followers`)
   .then(response => {
     response.data.forEach(function(e) {
+      followersArray.push(e.login);
       axios
         .get(e.url)
         .then(response => {
@@ -53,14 +55,30 @@ axios
         .catch(err => {
           console.log(err);
         });
-      //cardCreator(e)
     });
+    // followers();
   })
   .catch(err => {
     console.log(err);
   });
 
 const followersArray = [];
+
+/*
+//If I did the way the instructions said to using the followersArray[]:
+function followers() {
+  followersArray.forEach(function(username) {
+    return axios
+      .get(`https://api.github.com/users/${username}`)
+      .then(response => {
+        cardCreator(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+};
+*/
 
 cardCreator = function(data) {
   var cards = document.querySelector(".cards");
